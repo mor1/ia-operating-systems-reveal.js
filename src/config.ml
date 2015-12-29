@@ -1,6 +1,6 @@
 open Mirage
 
-let secrets_dir = "sekrit"
+let secrets_dir = "secrets"
 
 let secrets =
   match get_mode () with
@@ -21,7 +21,7 @@ let stack console =
   | `Socket -> socket_stackv4 console [Ipaddr.V4.any]
 
 let build_stack console =
-  let ns = Ipaddr.V4.of_string_exn "192.168.3.1" in
+  let ns = Ipaddr.V4.of_string_exn "8.8.8.8" in
   let stack = stack console in
   (conduit_direct ~tls:true stack), (Mirage.resolver_dns ~ns stack)
 
