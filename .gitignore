@@ -1,0 +1,7 @@
+/src/log
+/src/main.ml
+/src/Makefile
+/src/_build/
+/src/main.native
+/src/mir-*
+/src/ia.os-lectures*

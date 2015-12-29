@@ -1,0 +1,4 @@
+PKG lwt cstruct github conduit conduit.mirage cohttp irmin decompress
+PKG mirage mirage-types mirage-http mirage-flow
+EXT lwt
+B **/_build/**
