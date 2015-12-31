@@ -1,5 +1,6 @@
 /src/log
 /src/main.ml
+/src/key_gen.ml
 /src/Makefile
 /src/_build/
 /src/main.native
