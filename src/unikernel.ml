@@ -20,19 +20,19 @@ module Colour = struct
 end
 
 module Log (C: CONSOLE) = struct
-
   let log_trace c str = C.log_s c (Colour.green "+ %s" str)
   and log_data c str buf =
     let repr = String.escaped (Cstruct.to_string buf) in
     C.log_s c (Colour.blue "  %s: " str ^ repr)
   and log_error c e = C.log_s c (Colour.red "+ err: %s" e)
-
 end
 
 module Gh_clock (Clock: V1.CLOCK) (Time: V1_LWT.TIME) : Github_s.Time = struct
   let now () = Clock.time ()
   let sleep n = Time.sleep n
 end
+
+let user = "mor1"
 
 module Client
     (C: CONSOLE)
@@ -157,6 +157,7 @@ struct
         eventually_deflate deflator []
 
     end in
+
     let module Mirage_git_memory =
       Irmin_mirage.Irmin_git.Memory(Context)(Inflator)
     in
@@ -164,9 +165,12 @@ struct
       Mirage_git_memory(I.Contents.String)(I.Ref.String)(I.Hash.SHA1)
     in
     let module Sync = I.Sync(Store) in
+
     let config = Irmin_mirage.Irmin_git.config () in
-    let task = I.Task.create ~date:(Int64.of_int (int_of_float (Clock.time ())))
-                 ~owner:"MirageOS Irmin Scraperbot" in
+    let task = I.Task.create
+                 ~date:(Int64.of_float (Clock.time ()))
+                 ~owner:"MirageOS Irmin Scraperbot"
+    in
 
     let issues branch token user repo =
       let store branch path value =
@@ -197,8 +201,8 @@ struct
             ) comments)
         ) issues
     in
+
     let scrape_issues user token branch =
-      let user = "yomimono" in
       Github.(Monad.(run (
           let repos = User.repositories ~token ~user () in
           Stream.iter (fun repo ->
@@ -211,6 +215,7 @@ struct
             ) repos
         )))
     in
+
     SECRETS.read secrets "token" 0 4096 >>= function
     | `Error _ | `Ok [] | `Ok (_::_::_) ->
       L.log_error c "secrets kv_ro error reading token"
@@ -218,7 +223,7 @@ struct
       Lwt.return (Github.Token.of_string (Cstruct.to_string buf))
       >>= fun token ->
       let rec read_and_sync primary remote =
-        scrape_issues "yomimono" token primary
+        scrape_issues user token primary
         >>= fun () ->
         C.log c "issue scrape complete; updating local backup";
         Time.sleep 1.0
@@ -226,8 +231,11 @@ struct
         read_and_sync primary remote
       in
       C.log c "token read!";
+
       let remote = I.remote_uri "git://irmin-backup/local_issues" in
-      Store.Repo.create config >>= fun repo ->
-      Store.master task repo >>= fun primary ->
+      Store.Repo.create config
+      >>= fun repo ->
+      Store.master task repo
+      >>= fun primary ->
       read_and_sync primary remote
 end
