@@ -20,11 +20,11 @@ module Colour = struct
 end
 
 module Log (C: CONSOLE) = struct
-  let log_trace c str = C.log_s c (Colour.green "+ %s" str)
-  and log_data c str buf =
+  let trace c str = C.log_s c (Colour.green "+ %s" str)
+  and data c str buf =
     let repr = String.escaped (Cstruct.to_string buf) in
     C.log_s c (Colour.blue "  %s: " str ^ repr)
-  and log_error c e = C.log_s c (Colour.red "+ err: %s" e)
+  and error c e = C.log_s c (Colour.red "+ err: %s" e)
 end
 
 module Gh_clock (Clock: V1.CLOCK) (Time: V1_LWT.TIME) : Github_s.Time = struct
@@ -44,10 +44,11 @@ module Client
 struct
 
   module I   = Irmin
-  module L   = Log(C)
+  module Log = Log(C)
   module GHC = Gh_clock(Clock)(Time)
 
   let start c _clock _time res con secrets =
+    (* Build `Github` module for interactions with API *)
     let module Resolving_client = struct
 
       module Channel = Channel.Make(Conduit_mirage.Flow)
@@ -97,9 +98,12 @@ struct
 
     end in
     let module Github = Github_core.Make(GHC)(Resolving_client) in
+
+    (* Build Context and Inflator modules for Mirage/Irmin *)
     let module Context = struct
       let v () = Lwt.return (Some (res, con))
     end in
+
     let module Inflator = struct
       module IDBytes = struct
         include Bytes
@@ -158,84 +162,42 @@ struct
 
     end in
 
-    let module Mirage_git_memory =
-      Irmin_mirage.Irmin_git.Memory(Context)(Inflator)
-    in
+    (* Build the Mirage/Irmin modules *)
     let module Store =
-      Mirage_git_memory(I.Contents.String)(I.Ref.String)(I.Hash.SHA1)
+      Irmin_mirage.Irmin_git.Memory
+        (Context)(Inflator)(I.Contents.String)(I.Ref.String)(I.Hash.SHA1)
     in
     let module Sync = I.Sync(Store) in
+    let module View = I.View(Store) in
 
-    let config = Irmin_mirage.Irmin_git.config () in
-    let task = I.Task.create
-                 ~date:(Int64.of_float (Clock.time ()))
-                 ~owner:"MirageOS Irmin Scraperbot"
-    in
-
-    let issues branch token user repo =
-      let store branch path value =
-        Store.update (branch "updating with issue body") path value
-      in
-      let open Github in
-      let open Monad in
-      let issues = Issue.for_repo ~token ~user ~repo () in
-      Stream.iter (fun issue ->
-          let issue_id = Github_t.(issue.issue_number) in
-          C.log c (Printf.sprintf "issue %d: %s\n%!"
-                     issue_id Github_t.(issue.issue_title)
-                  );
-          let issue_comments =
-            Issue.comments ~token ~user ~repo ~num:issue_id ()
-          in
-          Stream.to_list issue_comments
-          >>= fun comments ->
-          embed (Lwt_list.iter_p (fun comment ->
-              let comment_id =
-                Int64.to_int (Github_t.(comment.issue_comment_id))
-              in
-              let path = I.Path.String_list.of_hum
-                           (Printf.sprintf "%s/%s/issues/%L/%L"
-                              user repo issue_id comment_id)
-              in
-              Github_t.(store branch path comment.issue_comment_body)
-            ) comments)
-        ) issues
-    in
-
-    let scrape_issues user token branch =
-      Github.(Monad.(run (
-          let repos = User.repositories ~token ~user () in
-          Stream.iter (fun repo ->
-              C.log c Github_t.(repo.repository_full_name);
-              match Github_t.(repo.repository_has_issues) with
-              | true ->
-                issues branch token user (Github_t.(repo.repository_name))
-              | false ->
-                return ()
-            ) repos
-        )))
-    in
+    (* Stop playing with module bricks and build some actual values... *)
 
     SECRETS.read secrets "token" 0 4096 >>= function
     | `Error _ | `Ok [] | `Ok (_::_::_) ->
-      L.log_error c "secrets kv_ro error reading token"
+      Log.error c "secrets kv_ro error reading token"
     | `Ok (buf::[]) ->
       Lwt.return (Github.Token.of_string (Cstruct.to_string buf))
       >>= fun token ->
-      let rec read_and_sync primary remote =
-        scrape_issues user token primary
-        >>= fun () ->
-        C.log c "issue scrape complete; updating local backup";
-        Time.sleep 1.0
-        >>= fun () ->
-        read_and_sync primary remote
-      in
       C.log c "token read!";
 
-      let remote = I.remote_uri "git://irmin-backup/local_issues" in
+      let config = Irmin_mirage.Irmin_git.config () in
+      let task =
+        let date = Int64.of_float (Clock.time ()) in
+        let owner = "MirageOS Irmin Webserver" in
+        I.Task.create ~date ~owner
+      in
+
+      let path = "git://github.com/mor1/ia-operating-systems.wiki.git" in
+      let remote = I.remote_uri path in
       Store.Repo.create config
       >>= fun repo ->
       Store.master task repo
+
       >>= fun primary ->
-      read_and_sync primary remote
+      Sync.pull_exn (primary "Sync remote") remote `Update
+      >>= fun () ->
+      Store.read_exn (primary "Get Home.md") ["Home.md"]
+      >>= fun home ->
+      C.log c (Printf.sprintf "%s\n%!" home);
+      return_unit
 end
