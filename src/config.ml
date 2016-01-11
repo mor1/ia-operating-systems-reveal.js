@@ -7,6 +7,13 @@ let secrets =
   | `Unix | `MacOSX -> direct_kv_ro secrets_dir
   | `Xen  -> crunch secrets_dir
 
+let assets_dir = "assets"
+
+let assets =
+  match get_mode () with
+  | `Unix | `MacOSX -> direct_kv_ro assets_dir
+  | `Xen  -> crunch assets_dir
+
 let stack console =
   let net =
     try match Sys.getenv "NET" with
@@ -29,19 +36,20 @@ let build_stack console =
 
 let client =
   foreign "Unikernel.Client"
-  @@ console @-> clock @-> time @-> resolver @-> conduit @-> kv_ro @-> job
+  @@ console
+     @-> clock @-> time @-> resolver @-> conduit @-> kv_ro @-> kv_ro @-> job
 
 let () =
-  let (con, res) = build_stack default_console in
+  let (conduit, resolver) = build_stack default_console in
   add_to_opam_packages
     [ "mirage-flow"; "mirage-git"; "mirage-http";
-      "decompress"; "irmin"; "github"
+      "decompress"; "irmin"; "github"; "cow"; "cowabloga"
     ];
   add_to_ocamlfind_libraries
     [ "irmin"; "irmin.mem"; "irmin.git"; "irmin.mirage";
-      "github"; "mirage-http"; "decompress"
+      "github"; "mirage-http"; "decompress"; "cow.syntax"; "cowabloga"
     ];
   register (* ~tracing *) "ia.os-lectures"
     [ client $ default_console $ default_clock $ default_time
-      $ res $ con $ secrets
+      $ resolver $ conduit $ secrets $ assets
     ]
