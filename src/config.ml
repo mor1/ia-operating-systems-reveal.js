@@ -1,18 +1,12 @@
 open Mirage
 
-let secrets_dir = "secrets"
+let _kv_ro d = match get_mode () with
+  | `Unix | `MacOSX -> direct_kv_ro d
+  | `Xen  -> crunch d
 
-let secrets =
-  match get_mode () with
-  | `Unix | `MacOSX -> direct_kv_ro secrets_dir
-  | `Xen  -> crunch secrets_dir
-
-let assets_dir = "assets"
-
-let assets =
-  match get_mode () with
-  | `Unix | `MacOSX -> direct_kv_ro assets_dir
-  | `Xen  -> crunch assets_dir
+let secrets = _kv_ro "secrets"
+let assets = _kv_ro "assets"
+let decks = _kv_ro "../ia-operating-systems.wiki"
 
 let stack console =
   let net =
@@ -36,20 +30,22 @@ let build_stack console =
 
 let client =
   foreign "Unikernel.Client"
-  @@ console
-     @-> clock @-> time @-> resolver @-> conduit @-> kv_ro @-> kv_ro @-> job
+  @@ console @-> clock @-> time
+     @-> resolver @-> conduit @-> http @-> kv_ro @-> kv_ro @-> kv_ro @-> job
 
 let () =
   let (conduit, resolver) = build_stack default_console in
+  let http_srv = http_server conduit in
   add_to_opam_packages
-    [ "mirage-flow"; "mirage-git"; "mirage-http";
+    [ "mirage-flow"; "mirage-git"; "mirage-http"; "astring";
       "decompress"; "irmin"; "github"; "cow"; "cowabloga"
     ];
   add_to_ocamlfind_libraries
     [ "irmin"; "irmin.mem"; "irmin.git"; "irmin.mirage";
-      "github"; "mirage-http"; "decompress"; "cow.syntax"; "cowabloga"
+      "github"; "mirage-http"; "decompress"; "cow.syntax"; "cowabloga";
+      "sexplib"; "sexplib.syntax"; "astring"
     ];
-  register (* ~tracing *) "ia.os-lectures"
+  register (* ~tracing *) "lectures"
     [ client $ default_console $ default_clock $ default_time
-      $ resolver $ conduit $ secrets $ assets
+      $ resolver $ conduit $ http_srv $ secrets $ assets $ decks
     ]
