@@ -1,3 +1,4 @@
+/log
 /src/log
 /src/main.ml
 /src/key_gen.ml
@@ -5,7 +6,10 @@
 /src/_build/
 /src/main.native
 /src/mir-*
-/src/ia.os-lectures*
+/src/lectures.x[el]*
+/src/lectures_libvirt.xml
+
 /src/secrets/
+
 /highlight.js/
 /reveal.js/
