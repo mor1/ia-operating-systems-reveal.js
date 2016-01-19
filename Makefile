@@ -2,7 +2,11 @@
 	highlight-clone highlight-build highlight-copy \
 	reveal-clone reveal-build reveal-copy
 
-all: highlight-copy reveal-copy
+all: highlight-copy reveal-copy unikernel
+
+unikernel:
+	mirage configure -f src/config.ml
+	cd src && make
 
 CP=rsync -avzrR
 
