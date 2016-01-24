@@ -89,7 +89,11 @@ module Client
       match cpts with
       | [] -> Site.index () |> respond_ok
 
-      | "ia-os" :: lecture :: [] when (String.is_suffix ~affix:".md" lecture) ->
+      | "ia-os" :: lecture :: []
+        when ((String.is_suffix ~affix:".md" lecture)
+              || (String.is_suffix ~affix:".png" lecture)
+             )
+        ->
         Lwt.catch
           (fun () -> read_decks lecture |> respond_ok)
           (fun e -> S.respond_not_found ~uri:(Cohttp.Request.uri req) ())
