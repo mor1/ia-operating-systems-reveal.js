@@ -19,7 +19,7 @@ highlight-clone:
 highlight-build:
 	cd highlight.js \
 	  && git co $(HIGHLIGHTV) \
-	  && node tools/build.js -t cdn python c bash
+	  && node tools/build.js -t cdn python c bash asm
 
 highlight-copy: highlight-build
 	rm -rf $(HIGHLIGHTD) && mkdir -p $(HIGHLIGHTD)
@@ -40,7 +40,7 @@ reveal-build:
 reveal-copy: reveal-build
 	rm -rf $(REVEALD) && mkdir -p $(REVEALD)
 	$(CP) reveal.js/./css/reveal.min.css $(REVEALD)
-	$(CP) reveal.js/./css/theme/black.css $(REVEALD)
+	$(CP) reveal.js/./css/theme/simple.css $(REVEALD)
 	$(CP) reveal.js/./js/reveal.min.js $(REVEALD)
 	$(CP) reveal.js/./css/print $(REVEALD)
 	$(CP) reveal.js/./lib $(REVEALD)
