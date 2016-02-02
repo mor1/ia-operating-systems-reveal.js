@@ -26,7 +26,7 @@ let links ~revealv =
   let _css_link_with_id id href = _css_link ~id href in
   <:html<
     $_css_link (_reveal_link "/css/reveal.min.css")$
-    $_css_link_with_id "theme" (_reveal_link "/css/theme/black.css")$
+    $_css_link_with_id "theme" (_reveal_link "/css/theme/white.css")$
 
     <!-- code syntax highlighting -->
     $_css_link "/highlight.js-9.1.0/styles/zenburn.min.css"$
