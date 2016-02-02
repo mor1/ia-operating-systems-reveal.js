@@ -21,7 +21,7 @@ highlight-build:
 	  && git co $(HIGHLIGHTV) \
 	  && node tools/build.js -t cdn python c bash asm
 
-highlight-copy: highlight-build
+highlight-copy:
 	rm -rf $(HIGHLIGHTD) && mkdir -p $(HIGHLIGHTD)
 	$(CP) highlight.js/build/./highlight.min.js $(HIGHLIGHTD)
 	$(CP) highlight.js/build/./styles/magula.min.css $(HIGHLIGHTD)
@@ -37,10 +37,10 @@ reveal-build:
 	  && git co 3.2.0 \
 	  && npm install && grunt
 
-reveal-copy: reveal-build
+reveal-copy:
 	rm -rf $(REVEALD) && mkdir -p $(REVEALD)
 	$(CP) reveal.js/./css/reveal.min.css $(REVEALD)
-	$(CP) reveal.js/./css/theme/simple.css $(REVEALD)
+	$(CP) reveal.js/./css/theme/white.css $(REVEALD)
 	$(CP) reveal.js/./js/reveal.min.js $(REVEALD)
 	$(CP) reveal.js/./css/print $(REVEALD)
 	$(CP) reveal.js/./lib $(REVEALD)
