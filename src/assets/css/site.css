@@ -1,3 +1,139 @@
+/* dates for index */
+.date {
+    border: 1px solid #999;
+    line-height: 1;
+    width: 3em;
+    position: relative;
+    float: left;
+    margin-right: 15px;
+    text-align: center;
+}
+.date .month {
+    text-transform: uppercase;
+    font-size: 0.9em;
+    padding-top: 0.3em;
+}
+.date .day {
+    font-size: 1.3em;
+}
+.date .year {
+    background-color: #2358B8;
+    color: #FFF;
+    font-size: 0.9em;
+    padding: 0.3em 0;
+    margin-top: 0.3em;
+}
+.date .hour {
+    display: none;
+}
+.date .min {
+    display: none;
+}
+
+/* base customisations */
+
+.reveal {
+    font-family: PT Sans, sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    color: #333333;
+}
+
+.reveal h2 {
+    letter-spacing: -0.04em;
+    top: 0%;
+}
+
+.reveal h3 {
+    margin-top: 1ex;
+    margin-bottom: 0;
+}
+
+.reveal .slides {
+    text-align: left;
+}
+
+.reveal section img {
+    margin: 15px 0px;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    box-shadow: none;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear;
+    text-align: center;
+}
+
+.reveal .slides p.center { text-align: center; }
+.reveal .slides .left { float: left }
+.reveal .slides .right { float: right }
+.reveal .slides .center { margin: 0 auto }
+
+/* tweak slide numbers */
+
+.reveal .slide-number {
+    background-color: #42affa;
+    opacity: .7;
+    line-height: 32px;
+    min-width: 32px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0;
+    right: 50px;
+    bottom: 50px;
+}
+
+.reveal section blockquote {
+    background: #ccc;
+    padding: 0.3ex 0.3em;
+    text-align: center;
+}
+
+#index ul article {
+    float: left;
+    width: 50%
+}
+#index br {
+    clear: left;
+}
+#index {
+    margin-bottom: 1em
+}
+
+/* footer, containing "home" and "print" buttons */
+#footer {
+    z-index: 98;
+}
+
+.reveal #footer {
+    background-size: auto 50px;
+
+    width: 100%;
+    height: 50px;
+
+    position: fixed;
+    bottom: -1em;
+
+    text-align: left;
+}
+
+.reveal #footer > a {
+    position: relative;
+    float: left;
+    z-index: 99;
+    color: #333399;
+}
+
+@media print {
+    .reveal #footer {
+        display: none
+    }
+}
+
 /*
 h1 { font-size: 2.2rem; font-weight: bold; }
 h2 { font-size: 1.8rem; font-weight: bold; }
@@ -51,52 +187,27 @@ code {
 }
 */
 
-.date {
-    border: 1px solid #999;
-    line-height: 1;
-    width: 3em;
-    position: relative;
-    float: left;
-    margin-right: 15px;
-    text-align: center;
-}
-.date .month {
-    text-transform: uppercase;
-    font-size: 0.9em;
-    padding-top: 0.3em;
-}
-.date .day {
-    font-size: 1.3em;
-}
-.date .year {
-    background-color: #2358B8;
-    color: #FFF;
-    font-size: 0.9em;
-    padding: 0.3em 0;
-    margin-top: 0.3em;
-}
-.date .hour {
-    display: none;
-}
-.date .min {
-    display: none;
-}
 
-.reveal .slide-number {
-    background-color: #42affa;
-    opacity: .7;
-    line-height: 32px;
-    min-width: 32px;
-    font-size: 14px;
-    border-radius: 4px;
-    text-align: center;
-    padding: 0;
-    right: 50px;
-    bottom: 50px;
-}
+/** images */
 
 /*
-#footer {
-    z-index: 98;
+.reveal section img {
+    margin: 15px 0px;
+    background: rgba(255, 255, 255, 0.12);
+*
+    border: 4px solid #333333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+*
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.reveal a:hover img {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #3b759e;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 */
