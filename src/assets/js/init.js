@@ -5,8 +5,14 @@ Reveal.initialize({
     progress: true,
     slideNumber: true,
     history: true,
+    center: false,
 
     transition: 'none', // none/fade/slide/convex/concave/zoom
+
+    math: {
+        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        config: 'TeX-AMS_HTML-full'
+    },
 
     // Optional reveal.js plugins
     dependencies: [
@@ -27,11 +33,8 @@ Reveal.initialize({
           async: true,
           callback: function() { hljs.initHighlightingOnLoad(); }
         },
-        { src: '/plugin/zoom-js/zoom.js',
-          async: true
-        },
-        { src: '/plugin/notes/notes.js',
-          async: true
-        }
+        { src: '/plugin/zoom-js/zoom.js', async: true },
+        { src: '/plugin/notes/notes.js', async: true },
+        { src: '/plugin/math/math.js', async: true }
     ]
 });
