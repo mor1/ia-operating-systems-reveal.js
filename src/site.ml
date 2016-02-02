@@ -15,30 +15,89 @@ let decks =
 
     Deck.os_ia
       ~given:(Date.t (2016, 02, 15))
-      ~title:"Processes"
-      ~description:"On what does the OS operate?"
-      ~permalink:"02-Processes";
+      ~title:"[I.1] Protection"
+      ~description:"Just what exactly is the OS protecting?"
+      ~permalink:"02-Protection";
 
+    Deck.os_ia
+      ~given:(Date.t (2016, 02, 17))
+      ~title:"[I.2] Processes"
+      ~description:"On what does the OS operate?"
+      ~permalink:"03-Processes";
+
+   Deck.os_ia
+      ~given:(Date.t (2016, 02, 19))
+      ~title:"[I.3] Scheduling"
+      ~description:"What does the OS run next?"
+      ~permalink:"04-Scheduling";
+
+   Deck.os_ia
+      ~given:(Date.t (2016, 02, 22))
+      ~title:"[II.1] Virtual Addressing"
+      ~description:"How does the OS protect processes from each other?"
+      ~permalink:"05-Virtual-Addressing";
+
+   Deck.os_ia
+      ~given:(Date.t (2016, 02, 24))
+      ~title:"[II.2] Paging"
+      ~description:"How does the OS manage virtual addresses?"
+      ~permalink:"06-Paging";
+
+   Deck.os_ia
+      ~given:(Date.t (2016, 02, 26))
+      ~title:"[II.3] Segmentation"
+      ~description:"?"
+      ~permalink:"07-Segmentation";
+
+   Deck.os_ia
+      ~given:(Date.t (2016, 02, 29))
+      ~title:"[III.1] IO Subsystem"
+      ~description:"How does the OS interact with the outside world?"
+      ~permalink:"08-IO-Subsystem";
+
+    Deck.os_ia
+      ~given:(Date.t (2016, 03, 02))
+      ~title:"[III.2] Storage"
+      ~description:"How does the OS manage persistence for processes?"
+      ~permalink:"09-Storage";
+
+    Deck.os_ia
+      ~given:(Date.t (2016, 03, 04))
+      ~title:"[III.3] Communications"
+      ~description:"How does the OS manage communication between processes?"
+      ~permalink:"10-Communications";
+
+    Deck.os_ia
+      ~given:(Date.t (2016, 03, 07))
+      ~title:"[IV.1] Case Study: Unix"
+      ~description:"Putting it together I"
+      ~permalink:"11-Unix";
+
+    Deck.os_ia
+      ~given:(Date.t (2016, 03, 09))
+      ~title:"[IV.2] Case Study: Windows NT"
+      ~description:"Putting it together II?"
+      ~permalink:"12-WindowsNT";
   ]
 
 let index () =
   let _content =
-    let _lectures = decks
-                    |> List.sort Deck.compare |> List.rev |> List.map (
-        fun d ->
-          <:html<
-          <article>
-            $Deck.(Date.to_html d.given)$
-            <h4><a href="$str:Deck.permalink d$">
-              $str:d.Deck.title$
-            </a></h4>
-            <p>
-              <strong>$str:Deck.(Room.to_string d.venue)$</strong>;
-              Dr Richard Mortier
-            </p>
-            <p><br /></p>
-          </article>
-      >>)
+    let _lectures =
+      decks |> List.sort Deck.compare |> List.rev |> List.map (
+          fun d ->
+            <:html<
+              <article>
+                $Deck.(Date.to_html d.given)$
+                <h4><a href="$str:Deck.permalink d$">
+                  $str:d.Deck.title$
+                </a></h4>
+                <p>
+                  <strong>$str:Deck.(Room.to_string d.venue)$</strong>;
+                  Dr Richard Mortier
+                </p>
+                <p><br /></p>
+              </article>
+            >>)
     in <:html< <ul>$list:_lectures$</ul> >>
   in
   let body =
@@ -78,7 +137,10 @@ let index () =
 
           <div class="row"><div class="small-12 columns" role="content">
             <h2>Lectures</h2>
-            $_content$
+            <div id="index">
+              $_content$
+              <br/>
+            </div>
           </div></div>
 
           <script src="/js/vendor/jquery-2.0.3.min.js"> </script>
