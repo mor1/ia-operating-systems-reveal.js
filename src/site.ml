@@ -9,73 +9,73 @@ let decks =
   [
     Deck.os_ia
       ~given:(Date.t (2016, 02, 12))
-      ~title:"Introduction"
+      ~title:"[01] Introduction"
       ~description:"A brief introduction to the course"
       ~permalink:"01-Introduction";
 
     Deck.os_ia
       ~given:(Date.t (2016, 02, 15))
-      ~title:"[I.1] Protection"
-      ~description:"Just what exactly is the OS protecting?"
+      ~title:"[02] Protection"
+      ~description:"What is the OS protecting?"
       ~permalink:"02-Protection";
 
     Deck.os_ia
       ~given:(Date.t (2016, 02, 17))
-      ~title:"[I.2] Processes"
+      ~title:"[03] Processes"
       ~description:"On what does the OS operate?"
       ~permalink:"03-Processes";
 
    Deck.os_ia
       ~given:(Date.t (2016, 02, 19))
-      ~title:"[I.3] Scheduling"
+      ~title:"[04] Scheduling"
       ~description:"What does the OS run next?"
       ~permalink:"04-Scheduling";
 
    Deck.os_ia
       ~given:(Date.t (2016, 02, 22))
-      ~title:"[II.1] Virtual Addressing"
+      ~title:"[05] Virtual Addressing"
       ~description:"How does the OS protect processes from each other?"
       ~permalink:"05-Virtual-Addressing";
 
    Deck.os_ia
       ~given:(Date.t (2016, 02, 24))
-      ~title:"[II.2] Paging"
+      ~title:"[06] Paging"
       ~description:"How does the OS manage virtual addresses?"
       ~permalink:"06-Paging";
 
    Deck.os_ia
       ~given:(Date.t (2016, 02, 26))
-      ~title:"[II.3] Segmentation"
+      ~title:"[07] Segmentation"
       ~description:"?"
       ~permalink:"07-Segmentation";
 
    Deck.os_ia
       ~given:(Date.t (2016, 02, 29))
-      ~title:"[III.1] IO Subsystem"
+      ~title:"[08] IO Subsystem"
       ~description:"How does the OS interact with the outside world?"
       ~permalink:"08-IO-Subsystem";
 
     Deck.os_ia
       ~given:(Date.t (2016, 03, 02))
-      ~title:"[III.2] Storage"
+      ~title:"[09] Storage"
       ~description:"How does the OS manage persistence for processes?"
       ~permalink:"09-Storage";
 
     Deck.os_ia
       ~given:(Date.t (2016, 03, 04))
-      ~title:"[III.3] Communications"
+      ~title:"[10] Communication"
       ~description:"How does the OS manage communication between processes?"
-      ~permalink:"10-Communications";
+      ~permalink:"10-Communication";
 
     Deck.os_ia
       ~given:(Date.t (2016, 03, 07))
-      ~title:"[IV.1] Case Study: Unix"
+      ~title:"[11] Case Study: Unix"
       ~description:"Putting it together I"
       ~permalink:"11-Unix";
 
     Deck.os_ia
       ~given:(Date.t (2016, 03, 09))
-      ~title:"[IV.2] Case Study: Windows NT"
+      ~title:"[12] Case Study: Windows NT"
       ~description:"Putting it together II?"
       ~permalink:"12-WindowsNT";
   ]
