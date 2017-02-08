@@ -1,4 +1,5 @@
-PKG lwt cstruct github conduit conduit.mirage cohttp irmin decompress astring
-PKG mirage mirage-types mirage-http mirage-flow cow cowabloga
-EXT lwt
+PKG functoria mirage mirage-types logs mirage-logs cohttp cstruct lwt
+PKG mirage-unix mirage-http mirage-net-unix mirage-clock-unix mirage-fs-unix
+PKG magic-mime tyxml
+
 B **/_build/**

@@ -4,8 +4,9 @@
 
 all: highlight-copy reveal-copy unikernel
 
+FLAGS ?= -vv --net socket -t unix --port 8080 --kv_ro direct
 unikernel:
-	cd src && mirage configure -t unix && make depend && make
+	cd src && mirage configure $(FLAGS) && make depend && make
 
 clean:
 	cd src && mirage clean

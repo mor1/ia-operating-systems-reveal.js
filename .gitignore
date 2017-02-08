@@ -1,15 +1,22 @@
 /log
-/src/log
+
+/src/.mirage.config
+/src/mirage-unikernel-lectures-*.opam
 /src/main.ml
 /src/key_gen.ml
 /src/Makefile
 /src/_build/
 /src/main.native
-/src/mir-*
-/src/lectures.x[el]*
-/src/lectures_libvirt.xml
+/src/lectures
+/src/myocamlbuild.ml
+/src/static1.ml
+/src/static1.mli
+/src/static2.ml
+/src/static2.mli
+/src/static3.ml
 
 /src/secrets/
+/src/ia-operating-systems.wiki/
 
 /highlight.js/
 /reveal.js/

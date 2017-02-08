@@ -1,8 +1,5 @@
-open Lwt
-open Cow
-open Cowabloga
-open Sexplib.Conv
-open Sexplib.Std
+open Tyxml
+open Deck
 
 let decks =
   let open Deck in
@@ -87,89 +84,109 @@ let decks =
   ]
 
 let index () =
-  let _content =
-    let _lectures =
-      decks |> List.sort Deck.compare |> List.rev |> List.map (
-          fun d ->
-            <:html<
-              <article>
-                $Deck.(Date.to_html d.given)$
-                <h4><a href="$str:Deck.permalink d$">
-                  $str:d.Deck.title$
-                </a></h4>
-                <p>
-                  <strong>$str:Deck.(Room.to_string d.venue)$</strong>;
-                  Dr Richard Mortier
-                </p>
-                <p><br /></p>
-              </article>
-            >>)
-    in <:html< <ul>$list:_lectures$</ul> >>
+  let open Html in
+  let script src = script ~a:[a_src src] (pcdata " ") in
+  let link_css ?(a=[]) css = Html.link ~a ~rel:[`Stylesheet] ~href:css () in
+  let head =
+    head (title (pcdata "CST IA :: Operating Systems")) [
+      meta ~a:[a_charset "utf-8"] ();
+      meta ~a:[a_name "viewport"; a_content "width=device-width"] ();
+      meta ~a:[a_name "apple-mobile-web-app-capable"; a_content "yes"] ();
+      meta ~a:[a_name "apple-mobile-web-app-status-bar-style";
+               a_content "black-translucent"] ();
+      meta ~a:[a_name "description"; a_content "CUCL IA Operating Systems"] ();
+
+      link_css "/css/foundation.min.css";
+      script "/js/vendor/custom.modernizr.js";
+      link_css ~a:[a_mime_type "text/css"]
+        "http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700";
+      link_css ~a:[a_media [`All]] "/css/site.css"
+    ]
   in
+
+  let content =
+    let deck_to_html d =
+      article [
+        Deck.Date.to_html d.given;
+        h4 [
+          a ~a:[a_href (permalink d)] [pcdata d.title]
+        ];
+        p (
+          (strong [pcdata Deck.(Room.to_string d.venue)])
+          :: [pcdata d.author]
+        );
+        p [ br () ]
+      ]
+    in
+    (decks
+     |> List.sort Deck.compare
+     |> List.map (fun d ->
+         li ~a:[a_class ["index-entry"]] [deck_to_html d]
+       )
+    )
+  in
+
   let body =
-    <:html<
-      <html lang="en">
-        <head>
-          <meta charset="utf-8"/>
-          <meta name="viewport" content="width=device-width"/>
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    body [
+      div ~a:[a_class ["contain-to-grid"]] [
+        nav ~a:[a_class ["top-bar"]; a_user_data "topbar" ""] [
+          ul ~a:[a_class ["title-area"]] [
+            li ~a:[a_class ["name"]] [
+              h1 [
+                a ~a:[a_id "logo";
+                      a_href"http://www.cl.cam.ac.uk/teaching/1516/OpSystems/"
+                     ]
+                  [
+                    img ~src:"http://www.cl.cam.ac.uk/images/identifier.gif"
+                    ~alt:"Logo" ()
+                ]
+              ]
+            ]
+          ];
+          section ~a:[a_class ["top-bar-section"]] []
+        ]
+      ];
+      div ~a:[a_class ["row"]] [
+        div ~a:[a_class ["small-12"; "columns"];
+                (Unsafe.string_attrib "role" "content")
+               ] [
+          h2 [
+            (pcdata "Lectures");
+          ];
+          div ~a:[a_id "index"] [
+            ul content
+          ]
+        ]
+      ];
 
-          <title>CST IA :: Operating Systems</title>
-          <meta name="description" content="CUCL IA Operating Systems" />
+      script "/js/vendor/jquery-2.0.3.min.js";
+      script "/js/foundation.min.js";
+      script "/js/foundation/foundation.topbar.js";
+      Html.script (cdata_script "$(document).foundation();");
+      Html.script ~a:[a_mime_type "text/javascript"]
+        (pcdata {__|
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'XX-XXXXXXXX-X']);
+_gaq.push(['_trackPageview']);
 
-          <link rel="stylesheet" href="/css/vendor/foundation.min.css"> </link>
-          <script src="/js/vendor/custom.modernizr.js"> </script>
-          <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700"
-                rel="stylesheet" type="text/css"> </link>
-          <link rel="stylesheet" href="/css/site.css" media="all"> </link>
-
-        </head>
-        <body>
-          <div class="contain-to-grid fixed">
-            <nav class="top-bar" data-topbar="">
-              <ul class="title-area">
-                <li class="name">
-                  <h1><a id="logo"
-                         href="http://www.cl.cam.ac.uk/teaching/1516/OpSystems/">
-                    <img src="http://www.cl.cam.ac.uk/images/identifier.gif"
-                         alt="Logo" />
-                  </a></h1>
-                </li>
-              </ul>
-              <section class="top-bar-section" />
-            </nav>
-          </div>
-
-          <div class="row"><div class="small-12 columns" role="content">
-            <h2>Lectures</h2>
-            <div id="index">
-              $_content$
-              <br/>
-            </div>
-          </div></div>
-
-          <script src="/js/vendor/jquery-2.0.3.min.js"> </script>
-          <script src="/js/vendor/foundation.min.js"> </script>
-          <script src="/js/vendor/foundation.topbar.js"> </script>
-          <script> <![CDATA[ $(document).foundation(); ]]> </script>
-          <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'XX-XXXXXXXX-X']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-          </script>
-        </body>
-      </html>
-    >>
+(function() {
+  var ga = document.createElement('script');
+  ga.type = 'text/javascript';
+  ga.async = true;
+  ga.src =
+    ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
+    + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(ga, s);
+})();
+|__}
+        )
+    ]
   in
-  return (Fragments.preamble ^ (Foundation.page ~body) ^ Fragments.postamble)
+
+  Lwt.return (Render.to_string @@ Html.html ~a:[Html.a_lang "en"] head body)
 
 let lecture ~lecture =
-  let d = List.find (fun d -> d.Deck.permalink = lecture) decks in
-  Revealjs320.page d
+  decks
+  |> List.find (fun d -> d.Deck.permalink = lecture)
+  |> Revealjs330.page
