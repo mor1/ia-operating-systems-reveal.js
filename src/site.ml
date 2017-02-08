@@ -5,82 +5,76 @@ let decks =
   let open Deck in
   [
     Deck.os_ia
-      ~given:(Date.t (2016, 03, 09))
-      ~title:"[00] Corrections"
-      ~description:"Corrections"
-      ~permalink:"00-Corrections";
-
-    Deck.os_ia
-      ~given:(Date.t (2016, 02, 12))
+      ~given:(Date.t (2017, 02, 17))
       ~title:"[01] Introduction"
       ~description:"A brief introduction to the course"
       ~permalink:"01-Introduction";
 
     Deck.os_ia
-      ~given:(Date.t (2016, 02, 15))
+      ~given:(Date.t (2017, 02, 20))
       ~title:"[02] Protection"
       ~description:"What is the OS protecting?"
       ~permalink:"02-Protection";
 
     Deck.os_ia
-      ~given:(Date.t (2016, 02, 17))
+      ~given:(Date.t (2017, 02, 22))
       ~title:"[03] Processes"
       ~description:"On what does the OS operate?"
       ~permalink:"03-Processes";
 
    Deck.os_ia
-      ~given:(Date.t (2016, 02, 19))
-      ~title:"[04] Scheduling"
+      ~given:(Date.t (2017, 02, 24))
+      ~title:"[04] Scheduling (1)"
       ~description:"What does the OS run next?"
       ~permalink:"04-Scheduling";
 
    Deck.os_ia
-      ~given:(Date.t (2016, 02, 22))
-      ~title:"[05] Virtual Addressing"
+      ~given:(Date.t (2017, 02, 27))
+      ~title:"[05] Scheduling (2)"
+      ~description:"What does the OS run next?"
+      ~permalink:"04-Scheduling";
+
+   Deck.os_ia
+      ~given:(Date.t (2017, 03, 01))
+      ~title:"[06] Virtual Addressing"
       ~description:"How does the OS protect processes from each other?"
       ~permalink:"05-Virtual-Addressing";
 
    Deck.os_ia
-      ~given:(Date.t (2016, 02, 24))
-      ~title:"[06] Paging"
+      ~given:(Date.t (2017, 03, 03))
+      ~title:"[07] Paging"
       ~description:"How does the OS manage virtual addresses?"
       ~permalink:"06-Paging";
 
    Deck.os_ia
-      ~given:(Date.t (2016, 02, 26))
-      ~title:"[07] Segmentation"
+      ~given:(Date.t (2017, 03, 06))
+      ~title:"[08] Segmentation"
       ~description:"?"
       ~permalink:"07-Segmentation";
 
    Deck.os_ia
-      ~given:(Date.t (2016, 02, 29))
-      ~title:"[08] IO Subsystem"
+      ~given:(Date.t (2017, 03, 08))
+      ~title:"[09] IO Subsystem"
       ~description:"How does the OS interact with the outside world?"
       ~permalink:"08-IO-Subsystem";
 
     Deck.os_ia
-      ~given:(Date.t (2016, 03, 02))
-      ~title:"[09] Storage"
+      ~given:(Date.t (2017, 03, 10))
+      ~title:"[10] Storage"
       ~description:"How does the OS manage persistence for processes?"
       ~permalink:"09-Storage";
 
     Deck.os_ia
-      ~given:(Date.t (2016, 03, 04))
-      ~title:"[10] Communication"
-      ~description:"How does the OS manage communication between processes?"
-      ~permalink:"10-Communication";
-
-    Deck.os_ia
-      ~given:(Date.t (2016, 03, 07))
+      ~given:(Date.t (2017, 03, 13))
       ~title:"[11] Case Study: Unix"
       ~description:"Putting it together I"
       ~permalink:"11-Unix";
 
     Deck.os_ia
-      ~given:(Date.t (2016, 03, 09))
-      ~title:"[12] Case Study: Windows NT"
-      ~description:"Putting it together II?"
-      ~permalink:"12-WindowsNT";
+      ~given:(Date.t (2017, 03, 15))
+      ~title:"[12] Case Study: Unix"
+      ~description:"Putting it together I"
+      ~permalink:"11-Unix";
   ]
 
 let index () =
