@@ -1,25 +1,32 @@
 .PHONY: all \
-	highlight-clone highlight-build highlight-copy \
-	reveal-clone reveal-build reveal-copy
+	highlight-pull highlight-build highlight-copy \
+	reveal-pull reveal-build reveal-copy
 
 all: highlight-copy reveal-copy unikernel
 
 unikernel:
-	mirage configure -f src/config.ml
-	cd src && make
+	cd src && mirage configure -t unix && make depend && make
+
+clean:
+	cd src && mirage clean
 
 CP=rsync -avzrR
 
-HIGHLIGHTV=9.1.0
+NODESH=docker run -ti -v $$(pwd -P):/cwd -v /usr/local/lib/node_modules \
+  --entrypoint sh mor1/node
+
+HIGHLIGHTV=9.9.0
 HIGHLIGHTD=src/assets/highlight.js-$(HIGHLIGHTV)
 
-highlight-clone:
-	git clone https://github.com/isagalaev/highlight.js
+highlight-pull:
+	[ -r highlight.js ] || git clone https://github.com/isagalaev/highlight.js
+	cd highlight.js && git co master && git pull
 
 highlight-build:
 	cd highlight.js \
-	  && git co $(HIGHLIGHTV) \
-	  && node tools/build.js -t cdn python c bash asm
+	  && git co tags/$(HIGHLIGHTV) \
+	  && $(NODESH) -c "npm install" \
+	  && $(NODESH) -c "node tools/build.js -t cdn python c bash asm"
 
 highlight-copy:
 	rm -rf $(HIGHLIGHTD) && mkdir -p $(HIGHLIGHTD)
@@ -27,15 +34,16 @@ highlight-copy:
 	$(CP) highlight.js/build/./styles/magula.min.css $(HIGHLIGHTD)
 	$(CP) highlight.js/build/./styles/zenburn.min.css $(HIGHLIGHTD)
 
-REVEALV=3.2.0
+REVEALV=3.3.0
 REVEALD=src/assets/reveal.js-$(REVEALV)
-reveal-clone:
-	git clone https://github.com/hakimel/reveal.js
+reveal-pull:
+	[ -r reveal.js ] || git clone https://github.com/hakimel/reveal.js
+	cd reveal.js && git co master && git pull
 
 reveal-build:
 	cd reveal.js \
-	  && git co 3.2.0 \
-	  && npm install && grunt
+	  && git co tags/$(REVEALV) \
+	  && $(NODESH) -c "npm install && npm install -g grunt-cli && grunt"
 
 reveal-copy:
 	rm -rf $(REVEALD) && mkdir -p $(REVEALD)
