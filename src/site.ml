@@ -8,6 +8,12 @@ let decks =
   let open Deck in
   [
     Deck.os_ia
+      ~given:(Date.t (2016, 03, 09))
+      ~title:"[00] Corrections"
+      ~description:"Corrections"
+      ~permalink:"00-Corrections";
+
+    Deck.os_ia
       ~given:(Date.t (2016, 02, 12))
       ~title:"[01] Introduction"
       ~description:"A brief introduction to the course"

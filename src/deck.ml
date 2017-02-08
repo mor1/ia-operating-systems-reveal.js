@@ -38,10 +38,11 @@ module Date = struct
 end
 
 module Room = struct
-  type t = ArtsA with sexp
+  type t = ArtsA | MillLane with sexp
 
   let to_string = function
     | ArtsA -> "Arts School, Room A"
+    | MillLane -> "Mill Lane, Room 1"
 
 end
 
@@ -67,7 +68,7 @@ type t = {
 } with sexp
 
 let os_ia ~given ~title ~description ~permalink =
-  { course=Course.IA_OS; venue=Room.ArtsA; author="Dr Richard Mortier";
+  { course=Course.IA_OS; venue=Room.MillLane; author="Dr Richard Mortier";
     given; title; description; permalink
   }
 
