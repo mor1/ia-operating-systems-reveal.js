@@ -93,12 +93,24 @@
     text-align: center;
 }
 
+ul.title-area {
+    list-style-type: none;
+}
+
+#index ul {
+    list-style-type: none;
+}
 #index ul article {
     float: left;
     width: 50%
 }
+#index ul article h4 {
+    margin: 0;
+}
+#index ul article p {
+    margin: 0;
+}
 #index br {
-    clear: left;
 }
 #index {
     margin-bottom: 1em

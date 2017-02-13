@@ -24,57 +24,57 @@ let decks =
 
    Deck.os_ia
       ~given:(Date.t (2017, 02, 24))
-      ~title:"[04] Scheduling (1)"
+      ~title:"[04] Scheduling"
       ~description:"What does the OS run next?"
       ~permalink:"04-Scheduling";
 
    Deck.os_ia
       ~given:(Date.t (2017, 02, 27))
-      ~title:"[05] Scheduling (2)"
-      ~description:"What does the OS run next?"
-      ~permalink:"04-Scheduling";
+      ~title:"[05] Scheduling Algorithms"
+      ~description:"How does it choose?"
+      ~permalink:"05-Scheduling-Algorithms";
 
    Deck.os_ia
       ~given:(Date.t (2017, 03, 01))
       ~title:"[06] Virtual Addressing"
       ~description:"How does the OS protect processes from each other?"
-      ~permalink:"05-Virtual-Addressing";
+      ~permalink:"06-Virtual-Addressing";
 
    Deck.os_ia
       ~given:(Date.t (2017, 03, 03))
       ~title:"[07] Paging"
       ~description:"How does the OS manage virtual addresses?"
-      ~permalink:"06-Paging";
+      ~permalink:"07-Paging";
 
    Deck.os_ia
       ~given:(Date.t (2017, 03, 06))
       ~title:"[08] Segmentation"
       ~description:"?"
-      ~permalink:"07-Segmentation";
+      ~permalink:"08-Segmentation";
 
    Deck.os_ia
       ~given:(Date.t (2017, 03, 08))
       ~title:"[09] IO Subsystem"
       ~description:"How does the OS interact with the outside world?"
-      ~permalink:"08-IO-Subsystem";
+      ~permalink:"09-IO-Subsystem";
 
     Deck.os_ia
       ~given:(Date.t (2017, 03, 10))
       ~title:"[10] Storage"
       ~description:"How does the OS manage persistence for processes?"
-      ~permalink:"09-Storage";
+      ~permalink:"10-Storage";
 
     Deck.os_ia
       ~given:(Date.t (2017, 03, 13))
       ~title:"[11] Case Study: Unix"
       ~description:"Putting it together I"
-      ~permalink:"11-Unix";
+      ~permalink:"11-Unix-I";
 
     Deck.os_ia
       ~given:(Date.t (2017, 03, 15))
       ~title:"[12] Case Study: Unix"
-      ~description:"Putting it together I"
-      ~permalink:"11-Unix";
+      ~description:"Putting it together II"
+      ~permalink:"12-Unix-II";
   ]
 
 let index () =
@@ -105,10 +105,10 @@ let index () =
         h4 [
           a ~a:[a_href (permalink d)] [pcdata d.title]
         ];
-        p (
-          (strong [pcdata Deck.(Room.to_string d.venue)])
-          :: [pcdata d.author]
-        );
+        p [ strong [pcdata Deck.(Room.to_string d.venue)];
+            br ();
+            pcdata d.author
+          ];
         p [ br () ]
       ]
     in
