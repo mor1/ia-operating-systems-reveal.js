@@ -21,5 +21,12 @@
 /highlight.js/
 /reveal.js/
 
-/.DS_Store
 /pdf/auto/
+
+.DS_Store
+*.aux
+*.xdv
+*.log
+*.flv
+*.fls
+*.fdb_latexmk

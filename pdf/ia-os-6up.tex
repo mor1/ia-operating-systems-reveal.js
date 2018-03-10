@@ -1,6 +1,6 @@
 %% latexmk -xelatex ia-os
 
-\documentclass[landscape]{article}
+\documentclass{article}
 \usepackage[margin=0.5in]{geometry}
 
 \usepackage{fontspec}
@@ -21,7 +21,7 @@
   \includepdf[
     pages=-,
     pagecommand={\thispagestyle{fancy}},
-    nup=1x1                     % 1-up, no frames
+    nup=2x3, landscape=false, frame=true % 6-up, frames
   ]{#1}}
 \makeatother
 
