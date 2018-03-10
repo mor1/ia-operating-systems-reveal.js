@@ -1,4 +1,5 @@
-PKG functoria mirage mirage-types logs mirage-logs cohttp cstruct lwt
+PKG functoria mirage mirage-types mirage-types-lwt logs mirage-logs
+PKG cohttp cohttp-lwt cstruct lwt
 PKG mirage-unix mirage-http mirage-net-unix mirage-clock-unix mirage-fs-unix
 PKG magic-mime tyxml
 

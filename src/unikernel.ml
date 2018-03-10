@@ -4,13 +4,15 @@ open Mirage_types_lwt
 let highlight_js = "highlight.js-9.9.0"
 let reveal_js = "reveal.js-3.3.0"
 
+module type HTTP = Cohttp_lwt.S.Server
+
 let http_src = Logs.Src.create "http" ~doc:"HTTP server"
 module Http_log = (val Logs.src_log http_src : Logs.LOG)
 
 let endswith suffix s = Astring.String.is_suffix ~affix:suffix s
 
 module Http
-    (S: Cohttp_lwt.Server)
+    (S: HTTP)
     (SECRETS: KV_RO)
     (ASSETS: KV_RO)
     (DECKS: KV_RO)
@@ -59,7 +61,7 @@ module Http
     | "plugin" :: _ ->
       Lwt.catch
         (fun () -> read_asset (reveal_js ^ path) |> respond_ok path)
-        (fun e -> respond_notfound uri)
+        (fun _e -> respond_notfound uri)
 
     | _ ->
       Lwt.catch

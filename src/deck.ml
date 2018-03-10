@@ -33,11 +33,12 @@ module Date = struct
 end
 
 module Room = struct
-  type t = ArtsA | MillLane
+  type t = ArtsA | MillLane1 | MillLane9
 
   let to_string = function
     | ArtsA -> "Arts School, Room A"
-    | MillLane -> "Mill Lane, Room 1"
+    | MillLane1 -> "Mill Lane, Room 1"
+    | MillLane9 -> "Mill Lane, Room 9"
 
 end
 
@@ -54,22 +55,22 @@ end
 
 type t = {
   course: Course.t;
-  venue: Room.t;
   given: Date.t;
   author: string;
   title: string;
   description: string;
   permalink: string;
+  venue: Room.t;
 }
 
-let os_ia ~given ~title ~description ~permalink =
+let os_ia ~given ~title ~description ~permalink ~venue =
   { course=Course.IA_OS;
-    venue=Room.MillLane;
     author="Dr Richard Mortier";
     given;
     title;
     description;
-    permalink
+    permalink;
+    venue
   }
 
 let permalink d = (Course.to_prefix d.course) ^ d.permalink
