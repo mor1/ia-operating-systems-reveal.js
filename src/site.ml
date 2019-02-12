@@ -5,85 +5,85 @@ let decks =
   let open Deck in
   [
     Deck.os_ia
-      ~given:(Date.t (2018, 02, 16))
+      ~given:(Date.t (2019, 02, 15))
       ~title:"[01] Introduction"
       ~description:"A brief introduction to the course"
       ~permalink:"01-Introduction"
       ~venue:Room.MillLane1;
 
     Deck.os_ia
-      ~given:(Date.t (2018, 02, 19))
+      ~given:(Date.t (2019, 02, 18))
       ~title:"[02] Protection"
       ~description:"What is the OS protecting?"
       ~permalink:"02-Protection"
       ~venue:Room.MillLane9;
 
     Deck.os_ia
-      ~given:(Date.t (2018, 02, 21))
+      ~given:(Date.t (2019, 02, 20))
       ~title:"[03] Processes"
       ~description:"On what does the OS operate?"
       ~permalink:"03-Processes"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 02, 23))
-      ~title:"(STRIKE?) [04] Scheduling"
+      ~given:(Date.t (2019, 02, 22))
+      ~title:"[04] Scheduling"
       ~description:"What does the OS run next?"
       ~permalink:"04-Scheduling"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 02, 26))
-      ~title:"(STRIKE?) [05] Scheduling Algorithms"
+      ~given:(Date.t (2019, 02, 25))
+      ~title:"[05] Scheduling Algorithms"
       ~description:"How does it choose?"
       ~permalink:"05-Scheduling-Algorithms"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 02, 28))
-      ~title:"(STRIKE?) [06] Virtual Addressing"
+      ~given:(Date.t (2019, 02, 27))
+      ~title:"[06] Virtual Addressing"
       ~description:"How does the OS protect processes from each other?"
       ~permalink:"06-Virtual-Addressing"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 03, 02))
+      ~given:(Date.t (2019, 03, 01))
       ~title:"[07] Paging"
       ~description:"How does the OS manage virtual addresses?"
       ~permalink:"07-Paging"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 03, 05))
-      ~title:"(STRIKE?) [08] Segmentation"
+      ~given:(Date.t (2019, 03, 04))
+      ~title:"[08] Segmentation"
       ~description:"?"
       ~permalink:"08-Segmentation"
       ~venue:Room.MillLane9;
 
    Deck.os_ia
-      ~given:(Date.t (2018, 03, 07))
-      ~title:"(STRIKE?) [09] IO Subsystem"
+      ~given:(Date.t (2019, 03, 06))
+      ~title:"[09] IO Subsystem"
       ~description:"How does the OS interact with the outside world?"
       ~permalink:"09-IO-Subsystem"
       ~venue:Room.MillLane9;
 
     Deck.os_ia
-      ~given:(Date.t (2018, 03, 09))
+      ~given:(Date.t (2019, 03, 08))
       ~title:"[10] Storage"
       ~description:"How does the OS manage persistence for processes?"
       ~permalink:"10-Storage"
       ~venue:Room.MillLane9;
 
     Deck.os_ia
-      ~given:(Date.t (2018, 03, 12))
-      ~title:"(STRIKE?) [11] Case Study: Unix"
+      ~given:(Date.t (2019, 03, 11))
+      ~title:"[11] Case Study: Unix"
       ~description:"Putting it together I"
       ~permalink:"11-Unix-I"
       ~venue:Room.MillLane9;
 
     Deck.os_ia
-      ~given:(Date.t (2018, 03, 14))
-      ~title:"(STRIKE?) [12] Case Study: Unix"
+      ~given:(Date.t (2019, 03, 13))
+      ~title:"[12] Case Study: Unix"
       ~description:"Putting it together II"
       ~permalink:"12-Unix-II"
       ~venue:Room.MillLane9;
