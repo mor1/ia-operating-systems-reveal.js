@@ -72,4 +72,4 @@ let page d =
       script "/js/init.js";
     ]
   in
-  Lwt.return (Render.to_string @@ Html.html head body)
+  Lwt.return (Render.to_string () @@ Html.html head body)

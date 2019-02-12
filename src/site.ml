@@ -190,7 +190,7 @@ _gaq.push(['_trackPageview']);
     ]
   in
 
-  Lwt.return (Render.to_string @@ Html.html ~a:[Html.a_lang "en"] head body)
+  Lwt.return (Render.to_string () @@ Html.html ~a:[Html.a_lang "en"] head body)
 
 let lecture ~lecture =
   decks
