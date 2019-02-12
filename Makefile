@@ -2,7 +2,7 @@
 all: highlight-copy reveal-copy unikernel
 
 .PHONY: run
-run: configure unikernel
+run: unikernel
 	./src/main.native
 
 FLAGS ?= -vv --net socket -t unix --port 8080 --kv_ro direct

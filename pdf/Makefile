@@ -15,5 +15,9 @@ clean:
 distclean:
 	$(LATEXMK) -C $(TEXS)
 
-%.pdf: %.tex
+%.pdf: %.tex $(wildcard [01]*.pdf)
 	$(LATEXMK) $<
+
+.PHONY: push
+push:
+	scp ia-os*.pdf slogin.cl:~/public_html/x 
