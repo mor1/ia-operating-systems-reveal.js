@@ -91,10 +91,10 @@ let decks =
 
 let index () =
   let open Html in
-  let script src = script ~a:[a_src src] (pcdata " ") in
+  let script src = script ~a:[a_src src] (txt " ") in
   let link_css ?(a=[]) css = Html.link ~a ~rel:[`Stylesheet] ~href:css () in
   let head =
-    head (title (pcdata "CST IA :: Operating Systems")) [
+    head (title (txt "CST IA :: Operating Systems")) [
       meta ~a:[a_charset "utf-8"] ();
       meta ~a:[a_name "viewport"; a_content "width=device-width"] ();
       meta ~a:[a_name "apple-mobile-web-app-capable"; a_content "yes"] ();
@@ -115,11 +115,11 @@ let index () =
       article [
         Deck.Date.to_html d.given;
         h4 [
-          a ~a:[a_href (permalink d)] [pcdata d.title]
+          a ~a:[a_href (permalink d)] [txt d.title]
         ];
-        p [ strong [pcdata Deck.(Room.to_string d.venue)];
+        p [ strong [txt Deck.(Room.to_string d.venue)];
             br ();
-            pcdata d.author
+            txt d.author
           ];
         p [ br () ]
       ]
@@ -157,7 +157,7 @@ let index () =
                 (Unsafe.string_attrib "role" "content")
                ] [
           h2 [
-            (pcdata "Lectures");
+            (txt "Lectures");
           ];
           div ~a:[a_id "index"] [
             ul content

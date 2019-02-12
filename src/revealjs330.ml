@@ -6,7 +6,7 @@ let page d =
     let link_css ?(a=[]) css = Html.link ~a ~rel:[`Stylesheet] ~href:css () in
 
     let open Html in
-    head (title (pcdata d.title)) [
+    head (title (txt d.title)) [
       meta ~a:[a_charset "utf-8"] ();
       meta ~a:[a_name "description"; a_content d.description] ();
       meta ~a:[a_name "author"; a_content d.author] ();
@@ -23,7 +23,7 @@ let page d =
       link_css ~a:[a_id "theme"] ("/reveal.js-3.3.0/css/theme/white.css");
       link_css "/highlight.js-9.9.0/styles/zenburn.min.css";
 
-      script (pcdata {__|
+      script (txt {__|
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
@@ -45,7 +45,7 @@ let page d =
 
   let body =
     let open Html in
-    let script s = script ~a:[a_src s] (pcdata " ") in
+    let script s = script ~a:[a_src s] (txt " ") in
     body [
       div ~a:[a_class ["reveal"]] [
         div ~a:[a_class ["slides"]] [

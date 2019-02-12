@@ -17,9 +17,9 @@ module Date = struct
       | _  -> "???"
     in
     div ~a:[a_class ["date"]] [
-      div ~a:[a_class ["month"]] [ pcdata (string_of_month d.month) ];
-      div ~a:[a_class ["day"]] [ pcdata (string_of_int d.day) ] ;
-      div ~a:[a_class ["year"]] [ pcdata (string_of_int d.year) ] ;
+      div ~a:[a_class ["month"]] [ txt (string_of_month d.month) ];
+      div ~a:[a_class ["day"]] [ txt (string_of_int d.day) ] ;
+      div ~a:[a_class ["year"]] [ txt (string_of_int d.year) ] ;
     ]
 
   let compare {year=ya;month=ma;day=da} {year=yb;month=mb;day=db} =
