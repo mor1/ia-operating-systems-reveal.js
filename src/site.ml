@@ -102,7 +102,7 @@ let index () =
                a_content "black-translucent"] ();
       meta ~a:[a_name "description"; a_content "CUCL IA Operating Systems"] ();
 
-      link_css "/css/foundation.min.css";
+      link_css "/css/vendor/foundation.min.css";
       script "/js/vendor/custom.modernizr.js";
       link_css ~a:[a_mime_type "text/css"]
         "http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700";
@@ -140,10 +140,10 @@ let index () =
             li ~a:[a_class ["name"]] [
               h1 [
                 a ~a:[a_id "logo";
-                      a_href"http://www.cl.cam.ac.uk/teaching/1516/OpSystems/"
+                      a_href"http://www.cl.cam.ac.uk/teaching/1819/OpSystems/"
                      ]
                   [
-                    img ~src:"http://www.cl.cam.ac.uk/images/identifier.gif"
+                    img ~src:"https://www.cl.cam.ac.uk/images/identifier.gif"
                     ~alt:"Logo" ()
                 ]
               ]
@@ -166,11 +166,11 @@ let index () =
       ];
 
       script "/js/vendor/jquery-2.0.3.min.js";
-      script "/js/foundation.min.js";
-      script "/js/foundation/foundation.topbar.js";
+      script "/js/vendor/foundation.min.js";
+      script "/js/vendor/foundation.topbar.js";
       Html.script (cdata_script "$(document).foundation();");
       Html.script ~a:[a_mime_type "text/javascript"]
-        (pcdata {__|
+        (txt {__|
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'XX-XXXXXXXX-X']);
 _gaq.push(['_trackPageview']);
