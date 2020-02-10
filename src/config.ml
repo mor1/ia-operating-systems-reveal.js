@@ -17,7 +17,7 @@ let port =
 let keys = Key.([ abstract port ])
 
 let stackv4 = generic_stackv4 default_network
-let http_svr = http_server @@ conduit_direct ~tls:false stackv4
+let http_svr = cohttp_server @@ conduit_direct ~tls:false stackv4
 
 let packages = List.map package [ "magic-mime"; "tyxml"; "markup" ]
 
