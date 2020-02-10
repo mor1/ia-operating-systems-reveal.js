@@ -5,88 +5,88 @@ let decks =
   let open Deck in
   [
     Deck.os_ia
-      ~given:(Date.t (2019, 02, 15))
+      ~given:(Date.t (2020, 02, 14))
       ~title:"[01] Introduction"
       ~description:"A brief introduction to the course"
       ~permalink:"01-Introduction"
-      ~venue:Room.MillLane1;
+      ~venue:Room.NMSA;
 
     Deck.os_ia
-      ~given:(Date.t (2019, 02, 18))
+      ~given:(Date.t (2020, 02, 17))
       ~title:"[02] Protection"
       ~description:"What is the OS protecting?"
       ~permalink:"02-Protection"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
     Deck.os_ia
-      ~given:(Date.t (2019, 02, 20))
+      ~given:(Date.t (2020, 02, 19))
       ~title:"[03] Processes"
       ~description:"On what does the OS operate?"
       ~permalink:"03-Processes"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 02, 22))
+      ~given:(Date.t (2020, 02, 21))
       ~title:"[04] Scheduling"
       ~description:"What does the OS run next?"
       ~permalink:"04-Scheduling"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 02, 25))
+      ~given:(Date.t (2020, 02, 24))
       ~title:"[05] Scheduling Algorithms"
       ~description:"How does it choose?"
       ~permalink:"05-Scheduling-Algorithms"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 02, 27))
+      ~given:(Date.t (2020, 02, 26))
       ~title:"[06] Virtual Addressing"
       ~description:"How does the OS protect processes from each other?"
       ~permalink:"06-Virtual-Addressing"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 03, 01))
+      ~given:(Date.t (2020, 02, 28))
       ~title:"[07] Paging"
       ~description:"How does the OS manage virtual addresses?"
       ~permalink:"07-Paging"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 03, 04))
+      ~given:(Date.t (2020, 03, 02))
       ~title:"[08] Segmentation"
       ~description:"?"
       ~permalink:"08-Segmentation"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
    Deck.os_ia
-      ~given:(Date.t (2019, 03, 06))
+      ~given:(Date.t (2020, 03, 04))
       ~title:"[09] IO Subsystem"
       ~description:"How does the OS interact with the outside world?"
       ~permalink:"09-IO-Subsystem"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
     Deck.os_ia
-      ~given:(Date.t (2019, 03, 08))
+      ~given:(Date.t (2020, 03, 06))
       ~title:"[10] Storage"
       ~description:"How does the OS manage persistence for processes?"
       ~permalink:"10-Storage"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
     Deck.os_ia
-      ~given:(Date.t (2019, 03, 11))
+      ~given:(Date.t (2020, 03, 09))
       ~title:"[11] Case Study: Unix"
       ~description:"Putting it together I"
       ~permalink:"11-Unix-I"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
 
     Deck.os_ia
-      ~given:(Date.t (2019, 03, 13))
+      ~given:(Date.t (2020, 03, 11))
       ~title:"[12] Case Study: Unix"
       ~description:"Putting it together II"
       ~permalink:"12-Unix-II"
-      ~venue:Room.MillLane9;
+      ~venue:Room.NMSA;
   ]
 
 let index () =
@@ -140,7 +140,7 @@ let index () =
             li ~a:[a_class ["name"]] [
               h1 [
                 a ~a:[a_id "logo";
-                      a_href"http://www.cl.cam.ac.uk/teaching/1819/OpSystems/"
+                      a_href"http://www.cl.cam.ac.uk/teaching/1920/OpSystems/"
                      ]
                   [
                     img ~src:"https://www.cl.cam.ac.uk/images/identifier.gif"

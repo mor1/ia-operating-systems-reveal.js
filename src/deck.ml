@@ -33,10 +33,11 @@ module Date = struct
 end
 
 module Room = struct
-  type t = ArtsA | MillLane1 | MillLane9
+  type t = ArtsA | NMSA | MillLane1 | MillLane9
 
   let to_string = function
     | ArtsA -> "Arts School, Room A"
+    | NMSA -> "New Museum Site, Lecture Theatre A"
     | MillLane1 -> "Mill Lane, Room 1"
     | MillLane9 -> "Mill Lane, Room 9"
 
