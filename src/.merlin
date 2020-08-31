@@ -3,6 +3,7 @@ B /Users/mort/.opam/default/lib/astring
 B /Users/mort/.opam/default/lib/bos
 B /Users/mort/.opam/default/lib/bytes
 B /Users/mort/.opam/default/lib/cmdliner
+B /Users/mort/.opam/default/lib/domain-name
 B /Users/mort/.opam/default/lib/fmt
 B /Users/mort/.opam/default/lib/fpath
 B /Users/mort/.opam/default/lib/functoria
@@ -10,6 +11,7 @@ B /Users/mort/.opam/default/lib/functoria-runtime
 B /Users/mort/.opam/default/lib/functoria/app
 B /Users/mort/.opam/default/lib/ipaddr
 B /Users/mort/.opam/default/lib/logs
+B /Users/mort/.opam/default/lib/lwt
 B /Users/mort/.opam/default/lib/macaddr
 B /Users/mort/.opam/default/lib/mirage
 B /Users/mort/.opam/default/lib/mirage-runtime
@@ -26,6 +28,7 @@ S /Users/mort/.opam/default/lib/astring
 S /Users/mort/.opam/default/lib/bos
 S /Users/mort/.opam/default/lib/bytes
 S /Users/mort/.opam/default/lib/cmdliner
+S /Users/mort/.opam/default/lib/domain-name
 S /Users/mort/.opam/default/lib/fmt
 S /Users/mort/.opam/default/lib/fpath
 S /Users/mort/.opam/default/lib/functoria
@@ -33,6 +36,7 @@ S /Users/mort/.opam/default/lib/functoria-runtime
 S /Users/mort/.opam/default/lib/functoria/app
 S /Users/mort/.opam/default/lib/ipaddr
 S /Users/mort/.opam/default/lib/logs
+S /Users/mort/.opam/default/lib/lwt
 S /Users/mort/.opam/default/lib/macaddr
 S /Users/mort/.opam/default/lib/mirage
 S /Users/mort/.opam/default/lib/mirage-runtime
@@ -45,4 +49,4 @@ S /Users/mort/.opam/default/lib/seq
 S /Users/mort/.opam/default/lib/stdlib-shims
 S /usr/local/lib/ocaml
 S .
-FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs
+FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A

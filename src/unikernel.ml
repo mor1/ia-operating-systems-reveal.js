@@ -1,5 +1,4 @@
 open Lwt.Infix
-open Mirage_types_lwt
 
 let highlight_js = "highlight.js-9.9.0"
 let reveal_js = "reveal.js-3.3.0"
@@ -13,20 +12,17 @@ let endswith suffix s = Astring.String.is_suffix ~affix:suffix s
 
 module Http
     (S: HTTP)
-    (SECRETS: KV_RO)
-    (ASSETS: KV_RO)
-    (DECKS: KV_RO)
+    (SECRETS: Mirage_kv.RO)
+    (ASSETS: Mirage_kv.RO)
+    (DECKS: Mirage_kv.RO)
 = struct
 
-  let fail_with fmt = Fmt.kstrf Lwt.fail_with fmt
+  let failf fmt = Fmt.kstrf Lwt.fail_with fmt
 
-  let safe_read ~pp_error ~size ~read device name =
-    size device name >>= function
-    | Error e -> fail_with "%a" pp_error e
-    | Ok size ->
-      read device name 0L size >>= function
-      | Error e -> fail_with "%a" pp_error e
-      | Ok bufs -> Lwt.return (Cstruct.copyv bufs)
+  let safe_read ~pp_error ~get device path =
+    get device (Mirage_kv.Key.v path) >>= function
+    | Error e -> failf "get: %a" pp_error e
+    | Ok body -> Lwt.return body
 
   let respond_ok path bodyt = bodyt >>= fun body ->
     let mime_type = Magic_mime.lookup path in
@@ -70,11 +66,11 @@ module Http
 
   let start http _secrets assets decks =
     let read_asset n = safe_read
-        ~pp_error:ASSETS.pp_error ~size:ASSETS.size ~read:ASSETS.read assets n
+        ~pp_error:ASSETS.pp_error ~get:ASSETS.get assets n
     in
 
     let read_deck n = safe_read
-        ~pp_error:DECKS.pp_error ~size:DECKS.size ~read:DECKS.read decks n
+        ~pp_error:DECKS.pp_error ~get:DECKS.get decks n
     in
 
     let callback (_, cid) request _body =
