@@ -1,6 +1,6 @@
 LATEXMK=latexmk -xelatex
 
-TEXS=$(wildcard *.tex)
+TEXS=$(wildcard ia-os*.tex)
 PDFS=$(patsubst %.tex,%.pdf,$(TEXS))
 
 .PHONY: all
@@ -20,4 +20,4 @@ distclean:
 
 .PHONY: push
 push:
-	scp ia-os*.pdf slogin.cl:~/public_html/x 
+	scp ia-os*.pdf ely.cl:~/public_html/x
