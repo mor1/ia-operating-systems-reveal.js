@@ -12,7 +12,6 @@ let endswith suffix s = Astring.String.is_suffix ~affix:suffix s
 
 module Http
     (S: HTTP)
-    (SECRETS: Mirage_kv.RO)
     (ASSETS: Mirage_kv.RO)
     (DECKS: Mirage_kv.RO)
 = struct
@@ -64,7 +63,7 @@ module Http
         (fun () -> read_asset path |> respond_ok path)
         (fun _ -> respond_notfound uri)
 
-  let start http _secrets assets decks =
+  let start http assets decks =
     let read_asset n = safe_read
         ~pp_error:ASSETS.pp_error ~get:ASSETS.get assets n
     in

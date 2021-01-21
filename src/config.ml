@@ -1,7 +1,7 @@
 open Mirage
 
-let secrets_key = Key.(value @@ kv_ro ~group:"secrets" ())
-let secrets = generic_kv_ro ~key:secrets_key "secrets"
+(* let secrets_key = Key.(value @@ kv_ro ~group:"secrets" ())
+ * let secrets = generic_kv_ro ~key:secrets_key "secrets" *)
 
 let fs_key = Key.(value @@ kv_ro ())
 let assets = generic_kv_ro ~key:fs_key "assets"
@@ -23,10 +23,10 @@ let packages = List.map package [ "magic-mime"; "tyxml"; "markup" ]
 
 let job =
   foreign ~packages ~keys "Unikernel.Http" (
-    http @-> kv_ro @-> kv_ro @-> kv_ro @-> job
+    http @-> kv_ro @-> kv_ro @-> job
   )
 
 let () =
   register "lectures" [
-     job $ http_svr $ secrets $ assets $ decks
+     job $ http_svr $ assets $ decks
   ]

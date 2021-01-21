@@ -15,6 +15,7 @@ B /Users/mort/.opam/default/lib/lwt
 B /Users/mort/.opam/default/lib/macaddr
 B /Users/mort/.opam/default/lib/mirage
 B /Users/mort/.opam/default/lib/mirage-runtime
+B /Users/mort/.opam/default/lib/ocaml
 B /Users/mort/.opam/default/lib/ocamlgraph
 B /Users/mort/.opam/default/lib/ptime
 B /Users/mort/.opam/default/lib/ptime/os
@@ -22,7 +23,6 @@ B /Users/mort/.opam/default/lib/result
 B /Users/mort/.opam/default/lib/rresult
 B /Users/mort/.opam/default/lib/seq
 B /Users/mort/.opam/default/lib/stdlib-shims
-B /usr/local/lib/ocaml
 B _build/default/.config.eobjs/byte
 S /Users/mort/.opam/default/lib/astring
 S /Users/mort/.opam/default/lib/bos
@@ -40,6 +40,7 @@ S /Users/mort/.opam/default/lib/lwt
 S /Users/mort/.opam/default/lib/macaddr
 S /Users/mort/.opam/default/lib/mirage
 S /Users/mort/.opam/default/lib/mirage-runtime
+S /Users/mort/.opam/default/lib/ocaml
 S /Users/mort/.opam/default/lib/ocamlgraph
 S /Users/mort/.opam/default/lib/ptime
 S /Users/mort/.opam/default/lib/ptime/os
@@ -47,6 +48,5 @@ S /Users/mort/.opam/default/lib/result
 S /Users/mort/.opam/default/lib/rresult
 S /Users/mort/.opam/default/lib/seq
 S /Users/mort/.opam/default/lib/stdlib-shims
-S /usr/local/lib/ocaml
 S .
 FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -warn-error -A
